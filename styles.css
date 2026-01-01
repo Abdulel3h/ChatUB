@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #D3D3D3);
+}
+
+.chat-logo, .uni-logo {
+    height: 50px; /* صغّرت الحجم كما طلبت */
+    width: auto;
+    object-fit: contain;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #2a2a2a;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    animation: slideIn 0.5s ease-out;
+}
+
+.user-message {
+    background-color: #1E90FF;
+    margin-left: auto;
+}
+
+.bot-message {
+    background-color: #333333;
+    margin-right: auto;
+}
+
+.input-area {
+    padding: 20px;
+    background-color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5); /* رفع قليل كما طلبت */
+}
+
+#questionInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #333333;
+    color: #e0e0e0;
+    font-size: 16px;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+#questionInput:focus {
+    background-color: #404040;
+}
+
+.send-button {
+    background-color: transparent;
+    border: none;
+    color: #1E90FF;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.3s;
+    animation: bounceUP 1.5s infinite;
+}
+
+.send-button:hover {
+    color: #00B7EB;
+}
+
+@keyframes bounceUP {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsiveness لتتناسب مع أي مقاس شاشة */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chat-logo, .uni-logo {
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    .input-area {
+        padding: 10px;
+    }
+}

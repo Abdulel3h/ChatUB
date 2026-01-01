@@ -1,0 +1,12 @@
+flask
+sqlalchemy
+transformers
+torch
+nltk
+openai
+python-dotenv
+requests
+beautifulsoup4
+fuzzywuzzy
+python-Levenshtein
+sentence-Transformers
