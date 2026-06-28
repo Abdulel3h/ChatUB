@@ -15,6 +15,7 @@ The project explores how a university-specific assistant can provide more useful
 - [Architecture](docs/architecture.md)
 - [Engineering Principles](docs/engineering-principles.md)
 - [Technical Decisions](docs/technical-decisions.md)
+- [Reviewer Guide](docs/reviewer-guide.md)
 
 ## Features
 
