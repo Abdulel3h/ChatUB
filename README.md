@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/project-banner.svg" alt="ChatUB project banner" />
+</p>
+
 # ChatUB - Local AI Academic Assistant
 
 ChatUB is a local AI academic assistant prototype for University of Bisha students. It answers Arabic academic questions using local FAQ data, multilingual sentence embeddings, similarity search, and an Ollama-served generation model.
@@ -9,6 +13,8 @@ The project explores how a university-specific assistant can provide more useful
 ## Documentation
 
 - [Architecture](docs/architecture.md)
+- [Engineering Principles](docs/engineering-principles.md)
+- [Technical Decisions](docs/technical-decisions.md)
 
 ## Features
 
