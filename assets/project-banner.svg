@@ -1,0 +1,27 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">ChatUB project banner</title>
+  <desc id="desc">Banner for ChatUB: local Arabic AI academic assistant with semantic search and Ollama.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#08111F"/>
+      <stop offset="1" stop-color="#102A2A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="80" y1="80" x2="1080" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="0.58" stop-color="#22C55E"/>
+      <stop offset="1" stop-color="#A7F3D0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" rx="28" fill="url(#bg)"/>
+  <path d="M82 230 C214 108 354 112 496 174 C650 242 788 118 940 136 C1038 148 1088 204 1128 128" stroke="url(#accent)" stroke-width="5" stroke-linecap="round"/>
+  <rect x="68" y="62" width="1064" height="196" rx="22" fill="#020617" fill-opacity="0.38" stroke="#E5E7EB" stroke-opacity="0.12"/>
+  <text x="104" y="122" fill="#E5E7EB" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="20" font-weight="650" letter-spacing="2">LOCAL AI ACADEMIC ASSISTANT</text>
+  <text x="104" y="178" fill="#FFFFFF" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="54" font-weight="750">ChatUB</text>
+  <text x="104" y="224" fill="#CBD5E1" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="25">Arabic NLP | Semantic Search | Flask | Ollama</text>
+  <g transform="translate(884 90)">
+    <rect x="0" y="0" width="208" height="122" rx="16" fill="#0F172A" stroke="#22C55E" stroke-opacity="0.32"/>
+    <text x="26" y="48" fill="#A7F3D0" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18">query</text>
+    <path d="M82 42 H152" stroke="#CBD5E1" stroke-opacity="0.55" stroke-width="2"/>
+    <text x="26" y="86" fill="#38BDF8" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="18">context</text>
+  </g>
+</svg>
