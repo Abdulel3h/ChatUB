@@ -73,7 +73,9 @@ curl -X POST http://127.0.0.1:5000/ask \
 
 ## Screenshots
 
-Screenshots are not currently committed. Add the chat interface, sample Arabic question flow, and an example grounded answer before pinning this repository.
+![ChatUB chat interface](assets/screenshots/chatub-home.png)
+
+Captured from the committed static chat interface. Add a grounded answer flow after the local model and FAQ evaluation set are ready.
 
 ## System Design
 
@@ -109,7 +111,7 @@ Modelfile              Ollama model definition
 - Add source citations to every response.
 - Move embedding generation to an offline build step.
 - Add tests for `/ask`, preprocessing, and no-match fallback behavior.
-- Add screenshots, demo video, and architecture diagram.
+- Add grounded-answer screenshots and a demo video after evaluation is ready.
 - Document the exact official university sources used in `data/`.
 - Review committed model artifacts and remove generated files that are not needed.
 
