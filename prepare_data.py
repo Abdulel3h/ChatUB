@@ -10,5 +10,12 @@ def load_all_faqs():
                 data = json.load(f)
                 # افترض وجود "qa_pairs" في كل JSON
                 if "qa_pairs" in data:
-                    all_faqs.extend(data["qa_pairs"])
+                    for item in data["qa_pairs"]:
+                        question = item.get("question") or item.get("q")
+                        answer = item.get("answer") or item.get("a")
+                        if question and answer:
+                            all_faqs.append({
+                                "question": question,
+                                "answer": answer,
+                            })
     return all_faqs
