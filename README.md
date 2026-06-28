@@ -6,6 +6,10 @@ ChatUB is a local AI academic assistant prototype for University of Bisha studen
 
 The project explores how a university-specific assistant can provide more useful answers than a generic chatbot by grounding responses in official academic question-answer content. It is a graduation-project style prototype focused on Arabic UX, local knowledge, and privacy-aware AI behavior.
 
+## Documentation
+
+- [Architecture](docs/architecture.md)
+
 ## Features
 
 - Arabic web chat interface
@@ -114,4 +118,3 @@ Abdulelah Alkhathami
 
 - Website: [abdulelah.de](https://www.abdulelah.de)
 - GitHub: [Abdulel3h](https://github.com/Abdulel3h)
-
