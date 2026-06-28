@@ -13,6 +13,7 @@ The project explores how a university-specific assistant can provide more useful
 ## Documentation
 
 - [Architecture](docs/architecture.md)
+- [Case Study](docs/case-study.md)
 - [Engineering Principles](docs/engineering-principles.md)
 - [Technical Decisions](docs/technical-decisions.md)
 - [Reviewer Guide](docs/reviewer-guide.md)
@@ -60,6 +61,12 @@ python app.py
 ```
 
 Open `http://127.0.0.1:5000`.
+
+Optional local environment:
+
+```bash
+FLASK_DEBUG=0
+```
 
 ## Usage
 

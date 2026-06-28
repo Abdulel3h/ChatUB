@@ -1,4 +1,6 @@
-from flask import Flask, request, jsonify, send_file
+import os
+
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from text_similarity import train_model, generate_custom_answer
 from prepare_data import load_all_faqs
 
@@ -16,7 +18,7 @@ def serve_frontend():
 @app.route('/<path:path>')
 def serve_static(path):
     try:
-        return send_file(path)
+        return send_from_directory('.', path)
     except FileNotFoundError:
         return "", 404
 
@@ -24,7 +26,7 @@ def serve_static(path):
 def ask_question():
     global model_data, context
 
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     question = data.get('question', '').strip()
 
     if not question:
@@ -41,4 +43,5 @@ def ask_question():
 
 if __name__ == '__main__':
     print("🚀 السيرفر يعمل على http://127.0.0.1:5000")
-    app.run(debug=True)
+    debug = os.getenv("FLASK_DEBUG", "0").lower() in {"1", "true", "yes"}
+    app.run(debug=debug)
