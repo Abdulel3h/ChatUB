@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/project-banner.svg" alt="ChatUB project banner" />
+  <img src="assets/branding/cover.svg" alt="ChatUB project banner" />
 </p>
 
 # ChatUB - Local AI Academic Assistant
@@ -8,7 +8,7 @@ ChatUB is a local AI academic assistant prototype for University of Bisha studen
 
 ## Overview
 
-The project explores how a university-specific assistant can provide more useful answers than a generic chatbot by grounding responses in official academic question-answer content. It is a graduation-project style prototype focused on Arabic UX, local knowledge, and privacy-aware AI behavior.
+The project explores how a university-specific assistant can provide more useful answers than a generic chatbot by using the committed academic question-answer content as reference context. It is a graduation-project style prototype focused on Arabic UX, local knowledge, and privacy-aware AI behavior.
 
 ## Documentation
 
@@ -108,9 +108,11 @@ Modelfile              Ollama model definition
 
 ## Challenges
 
+- When no FAQ passes the similarity threshold, generation can continue without reference context. Grounding is not guaranteed for every answer.
+
 - Arabic preprocessing and answer quality require careful evaluation.
 - Large model artifacts and checkpoints increase repository size.
-- The current app trains embeddings on startup, which can slow first response.
+- The current app computes FAQ embeddings on startup, which adds startup work; it does not train the embedding model.
 - There is no automated evaluation set for answer accuracy or hallucination behavior.
 
 ## Future Work
