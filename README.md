@@ -1,32 +1,29 @@
-<p align="center">
-  <img src="assets/branding/cover.svg" alt="ChatUB project banner" />
-</p>
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/branding/hero-mobile.svg">
+  <img src="assets/branding/hero.svg" width="100%" alt="ChatUB — knowledge, kept close. Arabic FAQ retrieval, semantic similarity and local generation with Ollama.">
+</picture>
 
-# ChatUB - Local AI Academic Assistant
+# ChatUB · Local Arabic Academic Assistant
 
-ChatUB is a local AI academic assistant prototype for University of Bisha students. It answers Arabic academic questions using local FAQ data, multilingual sentence embeddings, similarity search, and an Ollama-served generation model.
+An Arabic academic assistant that answers university questions from local FAQ data and a locally served model, so the knowledge and the inference both stay on the machine that runs it.
 
-## Overview
+**Status: prototype.** A graduation-project style prototype built around University of Bisha academic content. It has no automated answer-quality evaluation and is not deployed for students.
 
-The project explores how a university-specific assistant can provide more useful answers than a generic chatbot by using the committed academic question-answer content as reference context. It is a graduation-project style prototype focused on Arabic UX, local knowledge, and privacy-aware AI behavior.
+## Problem
 
-## Documentation
+A generic chatbot does not know a specific university's rules. Students asking in Arabic about course withdrawal, apology deadlines or registration get confident answers that are not grounded in their own institution's published content — and sending those questions to a hosted model means sending campus questions off-site.
 
-- [Architecture](docs/architecture.md)
-- [Case Study](docs/case-study.md)
-- [Engineering Principles](docs/engineering-principles.md)
-- [Technical Decisions](docs/technical-decisions.md)
-- [Reviewer Guide](docs/reviewer-guide.md)
+## Solution
 
-## Features
+ChatUB keeps a curated set of academic question–answer pairs in the repository, matches an incoming Arabic question against them with multilingual sentence embeddings, and passes the closest entry to a locally served model as reference context. The answer is generated in Arabic, on the same machine.
 
-- Arabic web chat interface
-- Flask API endpoint for questions
-- FAQ loading from local JSON files
-- Arabic preprocessing with NLTK stop words
-- SentenceTransformer embeddings for semantic matching
-- Ollama integration for generated Arabic answers
-- Basic conversation context for the latest question and answer
+## How it works
+
+1. **Load the local knowledge.** `prepare_data.py` reads the FAQ JSON files in `data/`.
+2. **Prepare the Arabic text.** `text_similarity.py` preprocesses the question, removing NLTK Arabic stop words.
+3. **Match by meaning, not keywords.** Multilingual SentenceTransformer embeddings select the nearest FAQ entry as reference context.
+4. **Generate locally.** The Ollama model defined in `Modelfile` produces a concise Arabic response using that context.
+5. **Keep a little continuity.** The latest question and answer are carried as conversation context.
 
 ## Architecture
 
@@ -39,18 +36,30 @@ User browser
   -> Ollama model "chatub" generates a concise Arabic response
 ```
 
-## Tech Stack
+## Verified capabilities
 
-- Python
-- Flask
-- SentenceTransformers
-- PyTorch
-- NLTK
-- Ollama
-- HTML, CSS, JavaScript
-- Local JSON FAQ data
+These are implemented and readable in the source; none is a measured quality result.
 
-## Installation
+| Capability | Where it lives |
+|---|---|
+| Arabic web chat interface | `index.html`, `script.js`, `styles.css` |
+| `/ask` JSON endpoint | `app.py` |
+| Local FAQ loading | `prepare_data.py`, `data/*.json` |
+| Arabic preprocessing with stop words | `text_similarity.py` |
+| Semantic matching via sentence embeddings | `text_similarity.py` |
+| Local generation wrapper | `Modelfile` |
+
+## Screenshot
+
+![ChatUB chat interface](assets/screenshots/chatub-home.png)
+
+Captured from the committed static chat interface.
+
+## Tech stack
+
+Python · Flask · SentenceTransformers · PyTorch · NLTK · Ollama
+
+## Quick start
 
 ```bash
 python -m venv .venv
@@ -60,17 +69,7 @@ ollama create chatub -f Modelfile
 python app.py
 ```
 
-Open `http://127.0.0.1:5000`.
-
-Optional local environment:
-
-```bash
-FLASK_DEBUG=0
-```
-
-## Usage
-
-Send a POST request to `/ask`:
+Open `http://127.0.0.1:5000`, then ask a question directly:
 
 ```bash
 curl -X POST http://127.0.0.1:5000/ask \
@@ -78,25 +77,18 @@ curl -X POST http://127.0.0.1:5000/ask \
   -d "{\"question\":\"ما شروط الاعتذار عن مقرر؟\"}"
 ```
 
-## Screenshots
+## Limitations
 
-![ChatUB chat interface](assets/screenshots/chatub-home.png)
+- **Grounding is not guaranteed.** When no FAQ passes the similarity threshold, generation can continue without reference context.
+- **No automated evaluation.** There is no test set for answer accuracy or hallucination behaviour, so no quality number is claimed.
+- **Startup cost.** FAQ embeddings are computed when the app starts; this is not model training.
+- **Repository weight.** Committed model and checkpoint artifacts make the repository large and should be reviewed.
+- **Sources.** The exact official university sources behind `data/` are not yet documented in the repository.
 
-Captured from the committed static chat interface. Add a grounded answer flow after the local model and FAQ evaluation set are ready.
-
-## System Design
-
-- `app.py` serves the frontend and `/ask` API.
-- `prepare_data.py` loads university FAQ files.
-- `text_similarity.py` preprocesses Arabic text, creates embeddings, and selects relevant context.
-- `Modelfile` defines the local Ollama model wrapper.
-- `data/` stores local FAQ JSON files.
-- `trained_model/` and `results/` contain generated model artifacts and should be reviewed before keeping them in Git.
-
-## Folder Structure
+## Repository structure
 
 ```text
-app.py                 Flask server and API route
+app.py                 Flask server and /ask route
 index.html             Chat UI
 script.js              Browser interaction logic
 styles.css             Chat styling
@@ -106,33 +98,14 @@ results/               Training checkpoint artifacts
 Modelfile              Ollama model definition
 ```
 
-## Challenges
+## Documentation
 
-- When no FAQ passes the similarity threshold, generation can continue without reference context. Grounding is not guaranteed for every answer.
-
-- Arabic preprocessing and answer quality require careful evaluation.
-- Large model artifacts and checkpoints increase repository size.
-- The current app computes FAQ embeddings on startup, which adds startup work; it does not train the embedding model.
-- There is no automated evaluation set for answer accuracy or hallucination behavior.
-
-## Future Work
-
-- Add source citations to every response.
-- Move embedding generation to an offline build step.
-- Add tests for `/ask`, preprocessing, and no-match fallback behavior.
-- Add grounded-answer screenshots and a demo video after evaluation is ready.
-- Document the exact official university sources used in `data/`.
-- Review committed model artifacts and remove generated files that are not needed.
+[Architecture](docs/architecture.md) · [Case study](docs/case-study.md) · [Engineering principles](docs/engineering-principles.md) · [Technical decisions](docs/technical-decisions.md) · [Reviewer guide](docs/reviewer-guide.md) · [Branding assets](assets/branding/README.md)
 
 ## License
 
 No license file is currently present. All rights are reserved by default unless a license is added.
 
-## Author
-
-Abdulelah Alkhathami
-
 ## Contact
 
-- Website: [abdulelah.de](https://www.abdulelah.de)
-- GitHub: [Abdulel3h](https://github.com/Abdulel3h)
+**Abdulelah Alkhathami** · [Portfolio](https://abdulelah.de) · [GitHub](https://github.com/Abdulel3h) · [Email](mailto:me@abdulelah.de)
